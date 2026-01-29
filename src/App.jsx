@@ -1,12 +1,6 @@
 import "./index.css";
-import Navbar from "./layouts/Navbar";
-import Home from "./pages/Home";
+import Rota from "./routes/rota";
 
 export default function App() {
-  return (
-    <>
-      <Navbar />
-      <Home />
-    </>
-  );
+  return <Rota />;
 }

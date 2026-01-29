@@ -2,16 +2,11 @@ export function mapJovemPayload(form) {
   return {
     nome: form.nome,
     idade: Number(form.idade),
-    congregaIgreja: form.congregaIgreja === "Sim",
+    congrega_igreja: form.congregaIgreja === "Sim" ? 1 : 0,
     congregacao: form.congregacao || null,
-    nomeIgreja: form.nomeIgreja || null,
-
-    oficinas: {
-      segunda: form.oficinaSegunda,
-      terca: form.oficinaTerca,
-      quarta: form.oficinaQuarta,
-    },
-
-    criadoEm: new Date().toISOString(),
+    nome_igreja: form.nomeIgreja || null,
+    oficina_segunda: form.oficinaSegunda || null,
+    oficina_terca: form.oficinaTerca || null,
+    oficina_quarta: form.oficinaQuarta || null,
   };
 }

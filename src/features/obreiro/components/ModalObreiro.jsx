@@ -83,7 +83,7 @@ export default function ModalObreiro({ open, onClose }) {
     nextStep();
   }
 
-  async function handleSubmit(e) {
+  async function Enviar(e) {
     e.preventDefault();
     setError("");
 
@@ -183,7 +183,7 @@ export default function ModalObreiro({ open, onClose }) {
             form={form}
             setSingle={setSingle}
             onPrev={prevStep}
-            onSubmit={handleSubmit}
+            onSubmit={Enviar}
             loading={loading}
             errors={errors} 
           />

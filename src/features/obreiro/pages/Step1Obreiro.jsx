@@ -12,7 +12,7 @@ export default function Step1Obreiro({ form, updateField, onNext, errors = {} })
         Inscrição – Obreiro (Etapa 1)
       </h2>
 
-      <form className="space-y-5">
+      <form  className="space-y-5">
         <div>
           <input
             value={form.nome}

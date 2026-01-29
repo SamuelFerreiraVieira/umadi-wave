@@ -36,7 +36,7 @@ export default function Step2Obreiro({ form, setSingle, onPrev, onNext, errors =
         Vida na igreja (Etapa 2)
       </h2>
 
-      <form className="space-y-6">
+      <form  className="space-y-6">
         <SingleChoiceGroup
           title="Há quanto tempo você congrega?"
           options={["Menos de 1 ano", "1 a 3 anos", "4 a 7 anos", "8 anos ou mais"]}

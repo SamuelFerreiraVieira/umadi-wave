@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 import Step1Jovem from "../pages/Step1Jovem";
 import Step2Jovem from "../pages/Step2Jovem";
@@ -11,6 +12,9 @@ export default function ModalJovem({ open, onClose }) {
   const [step, setStep] = useState(1);
 
   const [errors, setErrors] = useState({}); // ✅ FALTAVA ISSO
+  const [loading, setLoading] = useState(false);
+const [serverError, setServerError] = useState("");
+
 
   const [form, setForm] = useState({
     nome: "",
@@ -40,6 +44,12 @@ export default function ModalJovem({ open, onClose }) {
     setStep(1);
     setErrors({}); // ✅ limpa erros ao fechar
     onClose?.();
+  }
+
+  function Enviar(e) {
+    e?.preventDefault();
+    // aqui você decide: só avançar ou já enviar pro back
+    nextStep();
   }
 
   function updateField(key) {
@@ -84,6 +94,42 @@ export default function ModalJovem({ open, onClose }) {
       setErrors(validationErrors);
       return;
     }
+    
+    async function Enviar(e) {
+  e.preventDefault();
+
+  if (loading) return;
+
+  setLoading(true);
+  setErrors({});
+
+  try {
+    const payload = mapJovemPayload(form);
+
+    await api.post("/jovens", payload); // 🚀 tentativa real
+
+    // ✅ SÓ CHEGA AQUI SE DEU CERTO
+    setStep(4); // SuccessJovem
+  } catch (err) {
+    // ❌ NÃO AVANÇA
+    if (err.code === "ERR_NETWORK") {
+      setErrors({
+        server: "Servidor indisponível. Tente novamente mais tarde.",
+      });
+    } else if (err.response) {
+      setErrors({
+        server: err.response.data?.message || "Erro ao enviar inscrição.",
+      });
+    } else {
+      setErrors({
+        server: "Erro inesperado ao enviar inscrição.",
+      });
+    }
+  } finally {
+    setLoading(false);
+  }
+}
+
 
     setErrors({});
     nextStep();
@@ -144,9 +190,11 @@ export default function ModalJovem({ open, onClose }) {
             form={form}
             setSingle={setSingle}
             onPrev={prevStep}
-            onNext={handleSubmitFinal}
+            onSubmit={Enviar}     
+            
           />
         )}
+
 
         {step === 4 && <SuccessJovem onClose={handleClose} />}
       </div>

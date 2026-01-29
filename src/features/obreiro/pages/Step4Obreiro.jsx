@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export default function Step4Obreiro({
   form,
   setSingle,
@@ -40,13 +42,7 @@ export default function Step4Obreiro({
         Setores (Etapa 4)
       </h2>
 
-      <form
-        onSubmit={(e) => {
-          if (loading) return; 
-          onSubmit(e);
-        }}
-        className="space-y-8"
-      >
+      <form onSubmit={onSubmit} className="space-y-8">
         
         <div
           className={`space-y-4 ${errors.setoresPrioridade ? "p-3 rounded-xl border border-red-300 bg-red-50/40" : ""
@@ -136,7 +132,7 @@ export default function Step4Obreiro({
             Você poderá servir durante toda a conferência?
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 mt-4 gap-3">
             {["Sim", "Parcialmente", "Ainda não sei"].map((opt) => (
               <label
                 key={opt}
@@ -186,7 +182,7 @@ export default function Step4Obreiro({
           type="button"
           onClick={onPrev}
           disabled={loading}
-          className="block mx-auto text-sm text-gray-500 hover:underline disabled:opacity-60"
+          className="block mx-auto text-sm gap-3 text-gray-500 hover:underline disabled:opacity-60"
         >
           Voltar
         </button>
