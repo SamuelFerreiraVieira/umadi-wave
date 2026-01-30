@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
+  "homepage": "https://umadi-wave.jadson.cloud/",
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
     "axios": "^1.13.4",
