@@ -11,6 +11,7 @@ export default function Step3JovemOficinas({
   onPrev,
   onSubmit,          // ✅ agora é onSubmit
   loading = false,   // opcional
+  errors = {},
 }) {
   const podeIr = canGoNextStep3(form);
 

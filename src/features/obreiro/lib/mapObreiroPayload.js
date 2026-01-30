@@ -5,19 +5,19 @@ export function mapObreiroPayload(form) {
     congregacao: form.congregacao || null,
     whatsapp: form.whatsapp,
 
-    tempoIgreja: form.tempoIgreja,
+    tempo_igreja: form.tempoIgreja,
     batismo: form.batismo,
     voluntario: form.voluntario,
     area: form.area,
     equipe: form.equipe,
 
-    perfilPessoal: form.perfilPessoal,
+    perfil_pessoal: form.perfilPessoal,
     pressao: form.pressao,
     pontualidade: form.pontualidade,
-    preferenciaTrabalho: form.preferenciaTrabalho,
+    preferencia_trabalho: form.preferenciaTrabalho,
 
     setoresPrioridade: form.setoresPrioridade,
-    habilidadeEspecial: form.habilidadeEspecial || null,
-    disponibilidadeGeral: form.disponibilidadeGeral,
+    habilidade_especial: form.habilidadeEspecial || null,
+    disponibilidade_geral: form.disponibilidadeGeral,
   };
 }

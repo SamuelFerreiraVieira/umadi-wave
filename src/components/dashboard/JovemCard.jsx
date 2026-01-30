@@ -7,7 +7,7 @@ export default function JovemCard({ jovem }) {
     congregacao,
     nome_igreja,
     oficina_segunda,
-    oficina_terca,
+    oficina_terça,
     oficina_quarta,
   } = jovem;
 
@@ -42,7 +42,7 @@ export default function JovemCard({ jovem }) {
 
         <p className="text-sm text-gray-700">
           <span className="font-semibold">Oficinas:</span>{" "}
-          {oficina_segunda || "-"} / {oficina_terca || "-"} / {oficina_quarta || "-"}
+          {oficina_segunda || "-"} / {oficina_terça || "-"} / {oficina_quarta || "-"}
         </p>
       </div>
     </div>

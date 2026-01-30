@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 
 import Step1Jovem from "../pages/Step1Jovem";
 import Step2Jovem from "../pages/Step2Jovem";
@@ -7,13 +6,14 @@ import Step3JovemOficinas from "../pages/Step3JovemOficinas";
 import SuccessJovem from "../pages/SuccessJovem";
 
 import { validateStep1Jovem } from "@/features/jovem/lib/validateStep1";
+import { mapJovemPayload } from "@/features/jovem/lib/mapJovemPayload";
+import { api } from "@/services/api";
 
 export default function ModalJovem({ open, onClose }) {
   const [step, setStep] = useState(1);
 
   const [errors, setErrors] = useState({}); // ✅ FALTAVA ISSO
   const [loading, setLoading] = useState(false);
-const [serverError, setServerError] = useState("");
 
 
   const [form, setForm] = useState({
@@ -46,10 +46,36 @@ const [serverError, setServerError] = useState("");
     onClose?.();
   }
 
-  function Enviar(e) {
+  async function Enviar(e) {
     e?.preventDefault();
-    // aqui você decide: só avançar ou já enviar pro back
-    nextStep();
+
+    if (loading) return;
+
+    setLoading(true);
+    setErrors({});
+
+    try {
+      const payload = mapJovemPayload(form);
+      console.log("Payload:", payload);
+      await api.post("/jovens", payload);
+      setStep(4); // SuccessJovem
+    } catch (err) {
+      if (err.code === "ERR_NETWORK") {
+        setErrors({
+          server: "Servidor indisponível. Tente novamente mais tarde.",
+        });
+      } else if (err.response) {
+        setErrors({
+          server: err.response.data?.message || "Erro ao enviar inscrição.",
+        });
+      } else {
+        setErrors({
+          server: "Erro inesperado ao enviar inscrição.",
+        });
+      }
+    } finally {
+      setLoading(false);
+    }
   }
 
   function updateField(key) {
@@ -95,50 +121,11 @@ const [serverError, setServerError] = useState("");
       return;
     }
     
-    async function Enviar(e) {
-  e.preventDefault();
-
-  if (loading) return;
-
-  setLoading(true);
-  setErrors({});
-
-  try {
-    const payload = mapJovemPayload(form);
-
-    await api.post("/jovens", payload); // 🚀 tentativa real
-
-    // ✅ SÓ CHEGA AQUI SE DEU CERTO
-    setStep(4); // SuccessJovem
-  } catch (err) {
-    // ❌ NÃO AVANÇA
-    if (err.code === "ERR_NETWORK") {
-      setErrors({
-        server: "Servidor indisponível. Tente novamente mais tarde.",
-      });
-    } else if (err.response) {
-      setErrors({
-        server: err.response.data?.message || "Erro ao enviar inscrição.",
-      });
-    } else {
-      setErrors({
-        server: "Erro inesperado ao enviar inscrição.",
-      });
-    }
-  } finally {
-    setLoading(false);
-  }
-}
-
-
     setErrors({});
     nextStep();
   }
 
-  function handleSubmitFinal() {
-    console.log("✅ JOVEM ENVIADO:", form);
-    setStep(4);
-  }
+
 
   if (!open) return null;
 
@@ -191,7 +178,7 @@ const [serverError, setServerError] = useState("");
             setSingle={setSingle}
             onPrev={prevStep}
             onSubmit={Enviar}     
-            
+            errors={errors}
           />
         )}
 
