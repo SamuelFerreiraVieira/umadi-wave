@@ -16,11 +16,6 @@ import { validateStep2Obreiro } from "@/features/obreiro/lib/validateStep2";
 import { validateStep3Obreiro } from "@/features/obreiro/lib/validateStep3";
 import { validateStep4Obreiro } from "@/features/obreiro/lib/validateStep4";
 
-
-
-
-
-
 export default function ModalObreiro({ open, onClose }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
