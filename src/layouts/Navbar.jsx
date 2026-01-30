@@ -17,7 +17,7 @@ export default function Navbar() {
         {/* Logo */}
         <div className="flex items-center gap-2">
           <span className="text-xl font-bold text-gray-900">
-            <span className="text-black">WaveCon</span>
+            <span className="text-cyan-600">Wave<span className=" text-black">Conference</span></span>
           </span>
         </div>
 

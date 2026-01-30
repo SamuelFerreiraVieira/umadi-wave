@@ -8,7 +8,7 @@ export default function Step1Jovem({ form, updateField, setSingle, onNext, error
   return (
     <>
       <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-        Inscrição – Jovem (Etapa 1)
+        Inscrição – Participante (Etapa 1)
       </h2>
 
       <form className="space-y-6">

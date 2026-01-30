@@ -7,12 +7,12 @@ export default function Home() {
     <div className="relative min-h-screen overflow-hidden">
       <main className="px-4 sm:px-6 lg:px-10">
         <div className="max-w-3xl mx-auto pt-10 sm:pt-12 text-center">
-          <h1 className="hero-title text-cyan-600 text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">
+          <h1 className="hero-title text-black text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">
             Bem-vindo à
           </h1>
 
-          <h2 className="hero-title text-black text-4xl sm:text-5xl md:text-5xl font-extrabold tracking-tight">
-            WaveCon
+          <h2 className="hero-title text-cyan-600 text-4xl sm:text-5xl md:text-5xl font-extrabold tracking-tight">
+            WaveConference
           </h2>
 
           <p className="hero-subtitle mt-6 sm:mt-10 text-sm sm:text-base lg:text-2xl text-gray-700 leading-relaxed">
@@ -23,8 +23,8 @@ export default function Home() {
           </p>
 
           <h3 className="mt-10 sm:mt-16 text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800 tracking-tight question-appear">
-            Você é <span className="text-cyan-600">Obreiro</span> ou{" "}
-            <span className="text-cyan-600">Jovem</span>?
+            Você quer ser <span className="text-cyan-600">Obreiro</span> ou{" "}
+            <span className="text-cyan-600">Participante</span>?
           </h3>
 
           
@@ -55,7 +55,7 @@ export default function Home() {
           pointer-events-none wavecon-appear
         "
       >
-        #WaveCon
+        #WaveConference
       </h3>
     </div>
   );
