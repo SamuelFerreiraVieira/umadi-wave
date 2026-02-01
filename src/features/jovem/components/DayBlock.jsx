@@ -8,10 +8,11 @@ export default function DayBlock({ dayTitle, field, value, onSelect, options }) 
       <div className="grid grid-cols-1 gap-3 max-w-2xl mx-auto">
         {options.map((opt) => (
           <OptionCard
-            key={opt}
-            label={opt}
-            checked={value === opt}
-            onSelect={() => onSelect(field, opt)}
+            key={opt.label}
+            label={opt.label}
+            checked={value === opt.label}
+            onSelect={() => !opt.disabled && onSelect(field, opt.label)}
+            disabled={opt.disabled}
           />
         ))}
       </div>

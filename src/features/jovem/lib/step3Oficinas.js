@@ -1,4 +1,4 @@
-export const oficinasPorDia = [
+const oficinasBase = [
   {
     dayTitle: "Segunda-feira",
     field: "oficinaSegunda",
@@ -24,8 +24,28 @@ export const oficinasPorDia = [
   },
 ];
 
-export function canGoNextStep3(form) {
-  return Boolean(form.oficinaSegunda && form.oficinaTerca && form.oficinaQuarta);
+export function getOficinasPorDia(statusOficinas = []) {
+  return oficinasBase.map((dia) => ({
+    ...dia,
+    options: dia.options.map((opt) => {
+      const status = statusOficinas.find((s) => s.oficina === opt);
+      return {
+        label: opt,
+        disabled: status ? status.cheio : false,
+      };
+    }),
+  }));
+}
+
+export const oficinasPorDia = getOficinasPorDia(); // fallback sem status
+
+export function canGoNextStep3(form, statusOficinas = []) {
+  const selected = [form.oficinaSegunda, form.oficinaTerca, form.oficinaQuarta];
+  if (!selected.every(Boolean)) return false;
+  return selected.every((oficina) => {
+    const status = statusOficinas.find((s) => s.oficina === oficina);
+    return !status || !status.cheio;
+  });
 }
 
 export function handleSelectOficina(setSingle, field, opt) {
