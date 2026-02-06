@@ -28,6 +28,21 @@ export function canGoNextStep3(form) {
   return Boolean(form.oficinaSegunda && form.oficinaTerca && form.oficinaQuarta);
 }
 
-export function handleSelectOficina(setSingle, field, opt) {
+export function handleSelectOficina(setSingle, field, opt, disabledByField) {
+  if (disabledByField?.[field]?.has(opt)) return;
   setSingle(field, opt);
+}
+
+export function buildDisabledFromStatus(data) {
+  return {
+    oficinaSegunda: new Set(
+      (data?.oficina_segunda || []).filter(x => x.lotada).map(x => x.opt)
+    ),
+    oficinaTerca: new Set(
+      (data?.["oficina_terça"] || []).filter(x => x.lotada).map(x => x.opt)
+    ),
+    oficinaQuarta: new Set(
+      (data?.oficina_quarta || []).filter(x => x.lotada).map(x => x.opt)
+    ),
+  };
 }

@@ -9,15 +9,15 @@ export default function Step4Obreiro({
   errors = {}, // ✅
 }) {
   const setores = [
-    "Ordem",
+    "Ordem- Organização do público e manutenção da ordem no ambiente",
     "Estacionamento",
-    "Comunicação e mídia",
-    "Acolhimento (recepção e ordem)",
-    "Cozinha e equipe dos Lanches",
-    "Teatro",
+    "Comunicação e mídia- trabalho midiático do evento ",
+    "Acolhimento (recepção e ordem)- Entrada, conferência de inscrições e orientação e cuidado dos participantes",
+    "Cozinha e equipe dos Lanches- Preparo da alimentação",
+    "Teatro- Apresentações teatrais e organização de bastidores.",
     "WaveUp Team (TIME que levanta a energia da conf. interage com os jovens e conduz momentos de animação)",
-    "Sonoplastia e Iluminação",
-    "Lanchonete Umadi",
+    "Sonoplastia e Iluminação-  Controle do som, microfones, estrutura e luzes",
+    "Lanchonete Umadi- Atendimento ao público na parte de lanches",
   ];
 
   function toggleSetor(opt) {

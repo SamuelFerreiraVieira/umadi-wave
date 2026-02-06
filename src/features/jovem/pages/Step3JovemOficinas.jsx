@@ -1,4 +1,6 @@
 import DayBlock from "@/features/jovem/components/DayBlock";
+import { api } from "@/services/api";
+import { buildDisabledFromStatus } from "@/features/jovem/lib/step3Oficinas";
 import {
   oficinasPorDia,
   canGoNextStep3,
@@ -22,6 +24,27 @@ export default function Step3JovemOficinas({
     onSubmit(e); // ✅ chama o submit do pai
   }
 
+  const [disabledByField, setDisabledByField] = useState({
+    oficinaSegunda: new Set(),
+    oficinaTerca: new Set(),
+    oficinaQuarta: new Set(),
+  });
+
+  useEffect(() => {
+    async function loadStatus() {
+      try {
+        const { data } = await api.get("/jovens/oficinas-status");
+        setDisabledByField(buildDisabledFromStatus(data));
+      } catch (e) {
+        // se ainda não existir endpoint, só não bloqueia
+        console.warn("Não foi possível carregar o status das oficinas.");
+      }
+    }
+
+    loadStatus();
+  }, []);
+
+
   return (
     <>
       <h2 className="text-3xl font-bold text-gray-800 mb-2 text-center">
@@ -41,11 +64,13 @@ export default function Step3JovemOficinas({
               field={d.field}
               value={form[d.field]}
               options={d.options}
+              disabledOptions={disabledByField[d.field]} // ✅ NOVO
               onSelect={(field, opt) =>
-                handleSelectOficina(setSingle, field, opt)
+                handleSelectOficina(setSingle, field, opt, disabledByField) // ✅ NOVO
               }
             />
           ))}
+
         </div>
 
         <div className="mt-10 space-y-4">
