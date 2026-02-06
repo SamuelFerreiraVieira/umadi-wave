@@ -48,7 +48,7 @@ Uma aplicação web para inscrições em eventos da Umadi Wave, permitindo o cad
 
 ## API Externa
 
-Esta aplicação utiliza uma API externa para gerenciar as inscrições. A API está hospedada em `umadiapi.jadson.cloud` e o código fonte está disponível em [https://github.com/httpsJadson/api-umadi](https://github.com/httpsJadson/api-umadi).
+Esta aplicação utiliza uma API externa para gerenciar as inscrições. O código fonte está disponível em [https://github.com/httpsJadson/api-umadi](https://github.com/httpsJadson/api-umadi).
 
 ### Endpoints Principais
 - `GET /` - Lista todas as inscrições
